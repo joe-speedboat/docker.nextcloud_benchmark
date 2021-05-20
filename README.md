@@ -78,15 +78,16 @@ SLEEPING 10 seconds
 
 ## Docker detached start example
 ```
-docker run -d -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' -e TEST_FILES_COUNT=10 -e SPEED_LIMIT_UP=10M -e SPEED_LIMIT_DOWN=10M -e TEST_BLOCK_SIZE_MB=50 christian773/nextcloud_benchmark:latest
+docker run -d --rm -t --name bench -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' christian773/nextcloud_benchmark:latest
 ```
 
 ## Docker detached start example with multiple containers
 ```
 for c in {1..10}
 do
-   docker run -d -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' -e TEST_FILES_COUNT=10 -e SPEED_LIMIT_UP=10M -e SPEED_LIMIT_DOWN=10M -e TEST_BLOCK_SIZE_MB=50 christian773/nextcloud_benchmark:latest --name ncbench$c
+   docker run -d --rm -t --name bench$c -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' christian773/nextcloud_benchmark:latest
 done
+docker ps
 ```
 
 
