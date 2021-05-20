@@ -1,7 +1,7 @@
 #!/bin/sh -e
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 FROM="alpine:3.13"
-VERSION=1.07
+VERSION=1.08
 IMAGE=nextcloud_benchmark
 TO="christian773/$IMAGE"
 
