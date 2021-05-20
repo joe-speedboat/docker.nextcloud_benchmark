@@ -56,7 +56,7 @@ do
    if [ $? -eq 0 ]
    then
      $NC_BENCH_SCRIPT $NC_BENCH_CONF || true
-     cat $LOCAL_DIR/$BENCH_DIR.txt || true
+     # cat $LOCAL_DIR/$BENCH_DIR.txt || true
    else
      echo "ERROR: I CANT REACH THIS NEXTCLOUD, SO I WAIT"
    fi   
