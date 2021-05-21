@@ -9,13 +9,13 @@ CLOUD="cloud.comain.com"
 USR="..."
 # mandatory password or token
 PW="..."
-# optional: default is random 10-4096
+# optional in in Megabytes: default is random 10-4096
 TEST_BLOCK_SIZE_MB="50"
 # optional: default is random 10-200
 TEST_FILES_COUNT="10"
-# optional: default is random 1M-200M
+# optional in Megabytes/s: default is random 1M-200M
 SPEED_LIMIT_UP="10M"
-# optional: default is random 1M-200M
+# optional in Megabytes/s: default is random 1M-200M
 SPEED_LIMIT_DOWN="10M"
 ```
 
@@ -81,11 +81,20 @@ SLEEPING 10 seconds
 docker run -d --rm -t --name bench -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' christian773/nextcloud_benchmark:latest
 ```
 
-## Docker detached start example with multiple containers
+## Docker detached load test example
 ```
-for c in {1..10}
+# fire the load
+for c in {1..20}
 do
-   docker run -d --rm -t --name bench$c -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' christian773/nextcloud_benchmark:latest
+   docker run -d --rm -t --name bench$c -e CLOUD=nc.domain.ch -e USR=admin -e PW='super_secret' -e TEST_FILES_COUNT=20 -e SPEED_LIMIT_UP=1M -e SPEED_LIMIT_DOWN=1M -e TEST_BLOCK_SIZE_MB=5 christian773/nextcloud_benchmark:latest
+done
+docker ps
+docker logs -f bench1
+
+# shut it down
+for c in {1..20}
+do
+   docker kill bench$c
 done
 docker ps
 ```
