@@ -5,8 +5,12 @@ VERSION=1.09
 IMAGE=nextcloud_benchmark
 TO="christian773/$IMAGE"
 
+
 cd $(dirname $0) 
+git tag -a v$VERSION -m "build tag $VERSION"
 docker system prune -a -f
+git commit -a -m "build tag $VERSION"
+git push
 
 sed -i "s@^FROM .*@FROM $FROM@" Dockerfile
 sed -i "s@^ARG VERSION=.*@ARG VERSION=$VERSION@" Dockerfile
