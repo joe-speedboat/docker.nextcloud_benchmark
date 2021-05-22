@@ -42,13 +42,14 @@ BENCH_DIR=\"$(curl ifconfig.me | tr '.' '_')_$HOSTNAME\"
 SPEED_LIMIT_UP=\"${SPEED_LIMIT_UP:=$(shuf -i 1-200 -n1)M}\"
 SPEED_LIMIT_DOWN=\"${SPEED_LIMIT_DOWN:=$(shuf -i 20-200 -n1)M}\"
 LOCAL_DIR=/tmp
+BENCH_COUNT=\"${BENCH_COUNT:=9999999}\"
 " > $NC_BENCH_CONF
 
 
 
-while true
+for BENCH_RUN in $(seq 1 $BENCH_COUNT )
 do
-   echo "####################### STARTING ########################"
+   echo "####################### STARTING: $BENCH_RUN ######################"
    cat $NC_BENCH_CONF
    echo "#########################################################"
    echo "INFO: Testing connectivity"
@@ -56,9 +57,8 @@ do
    if [ $? -eq 0 ]
    then
      $NC_BENCH_SCRIPT $NC_BENCH_CONF || true
-     # cat $LOCAL_DIR/$BENCH_DIR.txt || true
    else
-     echo "ERROR: I CANT REACH THIS NEXTCLOUD, SO I WAIT"
+     echo "ERROR: I CANT REACH THIS NEXTCLOUD, SO I WAIT A MOMENT"
    fi   
    SLEEP=$(shuf -i 5-15 -n1)
    echo SLEEPING $SLEEP seconds

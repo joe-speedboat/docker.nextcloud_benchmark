@@ -17,6 +17,8 @@ TEST_FILES_COUNT="10"
 SPEED_LIMIT_UP="10M"
 # optional in Megabytes/s: default is random 1M-200M
 SPEED_LIMIT_DOWN="10M"
+# optional: amount of tests to run before stopping the container: default is 9999999
+BENCH_COUNT=10
 ```
 
 ## Docker attached start example
