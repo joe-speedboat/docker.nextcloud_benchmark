@@ -38,7 +38,7 @@ USR=\"${USR:=admin}\"
 PW=\"${PW:=passowrd_is_mandatory___idiot}\"
 TEST_BLOCK_SIZE_MB=\"${TEST_BLOCK_SIZE_MB:=$(shuf -i 10-4096 -n1)}\"
 TEST_FILES_COUNT=\"${TEST_FILES_COUNT:=$(shuf -i 10-200 -n1)}\"
-BENCH_DIR=\"$HOSTNAME\"
+BENCH_DIR=\"$(curl ifconfig.me | tr '.' '_')_$HOSTNAME\"
 SPEED_LIMIT_UP=\"${SPEED_LIMIT_UP:=$(shuf -i 1-200 -n1)M}\"
 SPEED_LIMIT_DOWN=\"${SPEED_LIMIT_DOWN:=$(shuf -i 20-200 -n1)M}\"
 LOCAL_DIR=/tmp
